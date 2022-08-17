@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en_US">
+<head>
+  <title>customers-example</title>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/assets/css/bootstrap.css">
+  <link rel="stylesheet" href="/assets/css/style.css">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" 
+        integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" 
+        crossorigin="anonymous">
+  <style></style> 
+</head>
+<body>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+          <div class="card">
+              <div class="card-body">
+                  <p class="card-title mb-3">
+                    Customer {{.customer.FirstName}} {{.customer.LastName}} has been deleted
+                  </p>
+                  <a href="/customers" class="btn btn-success">&laquo; Back to customers</a>
+              </div>
+          </div>
+      </div>
+    </div>
+  </div>
+  <script src="/assets/js/bootstrap.js"></script>
+</body>
+</html>

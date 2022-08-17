@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en_US">
+<head>
+  <title>customers-example</title>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/assets/css/bootstrap.css">
+  <link rel="stylesheet" href="/assets/css/style.css">
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.13.1/themes/base/jquery-ui.css">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" 
+        integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" 
+        crossorigin="anonymous">
+  <style></style> 
+</head>
+<body>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+          <div class="card">
+              <div class="card-body">
+                  <h5 class="card-title text-uppercase mb-3">{{if eq .mode "edit"}}Edit customer{{else if eq .mode "create"}}Create customer{{else}}View customer{{end}}</h5>
+                  <form action="{{if eq .mode "edit"}}/customers/{{.customer.Id}}{{else}}/customers{{end}}" method="post">
+                    <div class="form-group">
+                      <label for="firstname">First name</label>
+                      <input type="text" {{if eq .mode "view"}}readonly{{end}} class="{{if ne .mode "view"}}form-control{{else}}form-control-plaintext{{end}} {{range .errors}}{{if eq .Field "FirstName"}}is-invalid{{end}}{{end}}" id="firstname" name="firstname" placeholder="First name" value="{{.customer.FirstName}}">
+                      {{range .errors}}
+                        {{if eq .Field "FirstName"}}
+                          <div class="invalid-feedback">
+                            {{.Message}}
+                          </div>
+                        {{end}}
+                      {{end}}
+                    </div>
+                    <div class="form-group">
+                      <label for="lastname">Last name</label>
+                      <input type="text" {{if eq .mode "view"}}readonly{{end}} class="{{if ne .mode "view"}}form-control{{else}}form-control-plaintext{{end}} {{range .errors}}{{if eq .Field "LastName"}}is-invalid{{end}}{{end}}" id="lastname" name="lastname" placeholder="Last name" value="{{.customer.LastName}}">
+                      {{range .errors}}
+                        {{if eq .Field "LastName"}}
+                          <div class="invalid-feedback">
+                            {{.Message}}
+                          </div>
+                        {{end}}
+                      {{end}}
+                    </div>
+                    <div class="form-group">
+                      <label for="birthdate">Birth date</label>
+                      <input type="text" {{if eq .mode "view"}}readonly{{end}} class="{{if ne .mode "view"}}form-control{{else}}form-control-plaintext{{end}} {{range .errors}}{{if eq .Field "BirthDate"}}is-invalid{{end}}{{end}}" id="birthdate" name="birthdate" placeholder="Birth date" value="{{.customer.BirthDate.Format "2006-01-02"}}">
+                      {{range .errors}}
+                        {{if eq .Field "BirthDate"}}
+                          <div class="invalid-feedback">
+                            {{.Message}}
+                          </div>
+                        {{end}}
+                      {{end}}
+                    </div>
+                    <div class="form-group">
+                      <label for="gender">Gender</label>
+                      <select id="gender" name="gender" class="{{if ne .mode "view"}}form-control{{else}}form-control-plaintext{{end}} {{range .errors}}{{if eq .Field "Gender"}}is-invalid{{end}}{{end}}" style="{{if eq .mode "view"}}pointer-events: none;{{end}}">
+                        <option value="M" {{if eq .customer.Gender "M"}}selected{{end}}>Male</option>
+                        <option value="F" {{if eq .customer.Gender "F"}}selected{{end}}>Female</option>
+                      </select>
+                      {{range .errors}}
+                        {{if eq .Field "Gender"}}
+                          <div class="invalid-feedback">
+                            {{.Message}}
+                          </div>
+                        {{end}}
+                      {{end}}
+                    </div>
+                    <div class="form-group">
+                      <label for="email">Email</label>
+                      <input type="email" {{if eq .mode "view"}}readonly{{end}} class="{{if ne .mode "view"}}form-control{{else}}form-control-plaintext{{end}} {{range .errors}}{{if eq .Field "Email"}}is-invalid{{end}}{{end}}" id="email" name="email" placeholder="Email" value="{{.customer.Email}}">
+                      {{range .errors}}
+                        {{if eq .Field "Email"}}
+                          <div class="invalid-feedback">
+                            {{.Message}}
+                          </div>
+                        {{end}}
+                      {{end}}
+                    </div>
+                    <div class="form-group">
+                      <label for="address">Address</label>
+                      <textarea type="text" {{if eq .mode "view"}}readonly{{end}} class="{{if ne .mode "view"}}form-control{{else}}form-control-plaintext{{end}} {{range .errors}}{{if eq .Field "Address"}}is-invalid{{end}}{{end}}" id="address" name="address" placeholder="Address">{{.customer.Address}}</textarea>
+                      {{range .errors}}
+                        {{if eq .Field "Address"}}
+                          <div class="invalid-feedback">
+                            {{.Message}}
+                          </div>
+                        {{end}}
+                      {{end}}
+                    </div>
+                    <a href="/customers" class="btn btn-success">&laquo; Back to customers</a>
+                    {{if eq .mode "edit"}}
+                      <button type="submit" class="btn btn-primary">Save</button>
+                    {{else if eq .mode "view"}}
+                      <a href="/customers/{{.customer.Id}}/edit" class="btn btn-primary">Edit customer</a>
+                    {{else if eq .mode "create"}}
+                      <button type="submit" class="btn btn-primary">Create</button>
+                    {{end}}
+                  </form>
+              </div>
+          </div>
+      </div>
+    </div>
+  </div>
+  <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+  <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
+  <script src="/assets/js/bootstrap.js"></script>
+  <script>
+    $(function(){
+        $("#birthdate").datepicker({
+            dateFormat: "yy-mm-dd"
+        });
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en_US">
+<head>
+  <title>customers-example</title>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/assets/css/bootstrap.css">
+  <link rel="stylesheet" href="/assets/css/style.css">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" 
+        integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" 
+        crossorigin="anonymous">
+  <style></style> 
+</head>
+<body>
+  <div class="container">
+    <div class="row mb-3">
+      <div class="col-md-12 pt-3 pb-3">
+        <div class="card">
+          <div class="card-body">
+              <h5 class="card-title text-uppercase mb-0">Search customers</h5>
+          </div>
+          <div class="pl-3 pr-3 pb-3">
+            <form action="/customers" method="get">
+              <div class="form-group">
+                <label for="firstname">First name</label>
+                <input type="text" class="form-control" id="firstname" name="firstname" placeholder="Enter first name" value="{{.searchFilter.FirstName}}">
+              </div>
+              <div class="form-group">
+                <label for="lastname">Last name</label>
+                <input type="text" class="form-control" id="lastname" name="lastname" placeholder="Enter last name" value="{{.searchFilter.LastName}}">
+              </div>
+              <input type="hidden" id="page" name="page" value="1">
+              <input type="hidden" id="pageSize" name="pageSize" value="{{.pagination.PageSize}}">
+              <input type="hidden" id="sort" name="sort" value="{{.pagination.Sort}}">
+              <input type="hidden" id="direction" name="direction" value="{{.pagination.Direction}}">
+              <button type="submit" class="btn btn-primary">Search</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+          <div class="card">
+              <div class="card-body">
+                  <h5 class="card-title text-uppercase mb-0">Manage customers</h5>
+              </div>
+              <div class="card-body">
+                <a href="/customers/create" class="btn btn-outline-info btn-circle btn-sm btn-circle ml-2"><i class="fa fa-plus"></i> Create customer</a>
+              </div>
+              <div class="table-responsive">
+                  <table class="table table-striped no-wrap user-table mb-0">
+                    <thead>
+                      <tr>
+                        <th scope="col" class="border-0 text-uppercase font-medium">
+                          Firstname 
+                          {{if eq $.pagination.Sort "first_name"}}
+                            {{if eq $.pagination.Direction "asc"}}
+                              <a href="/customers?page={{$.pagination.Page}}&pageSize={{$.pagination.PageSize}}&sort=first_name&direction=desc&firstname={{$.searchFilter.FirstName}}&lastname={{$.searchFilter.LastName}}">
+                                <i class="fas fa-sort-up"></i>
+                              </a>
+                            {{else}}
+                              <a href="/customers?page={{$.pagination.Page}}&pageSize={{$.pagination.PageSize}}&sort=first_name&direction=asc&firstname={{$.searchFilter.FirstName}}&lastname={{$.searchFilter.LastName}}">
+                                <i class="fas fa-sort-down"></i>
+                              </a>
+                            {{end}}
+                          {{else}}
+                            <a href="/customers?page={{$.pagination.Page}}&pageSize={{$.pagination.PageSize}}&sort=first_name&direction=asc&firstname={{$.searchFilter.FirstName}}&lastname={{$.searchFilter.LastName}}">
+                              <i class="fas fa-sort"></i>
+                            </a>
+                          {{end}}
+                        </th>
+                        <th scope="col" class="border-0 text-uppercase font-medium">
+                          Lastname
+                          {{if eq $.pagination.Sort "last_name"}}
+                            {{if eq $.pagination.Direction "asc"}}
+                              <a href="/customers?page={{$.pagination.Page}}&pageSize={{$.pagination.PageSize}}&sort=last_name&direction=desc&firstname={{$.searchFilter.FirstName}}&lastname={{$.searchFilter.LastName}}">
+                                <i class="fas fa-sort-up"></i>
+                              </a>
+                            {{else}}
+                              <a href="/customers?page={{$.pagination.Page}}&pageSize={{$.pagination.PageSize}}&sort=last_name&direction=asc&firstname={{$.searchFilter.FirstName}}&lastname={{$.searchFilter.LastName}}">
+                                <i class="fas fa-sort-down"></i>
+                              </a>
+                            {{end}}
+                          {{else}}
+                            <a href="/customers?page={{$.pagination.Page}}&pageSize={{$.pagination.PageSize}}&sort=last_name&direction=asc&firstname={{$.searchFilter.FirstName}}&lastname={{$.searchFilter.LastName}}">
+                              <i class="fas fa-sort"></i>
+                            </a>
+                          {{end}}
+                        </th>
+                        <th scope="col" class="border-0 text-uppercase font-medium">
+                          Birth date
+                          {{if eq $.pagination.Sort "birth_date"}}
+                            {{if eq $.pagination.Direction "asc"}}
+                              <a href="/customers?page={{$.pagination.Page}}&pageSize={{$.pagination.PageSize}}&sort=birth_date&direction=desc&firstname={{$.searchFilter.FirstName}}&lastname={{$.searchFilter.LastName}}">
+                                <i class="fas fa-sort-up"></i>
+                              </a>
+                            {{else}}
+                              <a href="/customers?page={{$.pagination.Page}}&pageSize={{$.pagination.PageSize}}&sort=birth_date&direction=asc&firstname={{$.searchFilter.FirstName}}&lastname={{$.searchFilter.LastName}}">
+                                <i class="fas fa-sort-down"></i>
+                              </a>
+                            {{end}}
+                          {{else}}
+                            <a href="/customers?page={{$.pagination.Page}}&pageSize={{$.pagination.PageSize}}&sort=birth_date&direction=asc&firstname={{$.searchFilter.FirstName}}&lastname={{$.searchFilter.LastName}}">
+                              <i class="fas fa-sort"></i>
+                            </a>
+                          {{end}}
+                        </th>
+                        <th scope="col" class="border-0 text-uppercase font-medium">
+                          Gender
+                          {{if eq $.pagination.Sort "gender"}}
+                            {{if eq $.pagination.Direction "asc"}}
+                              <a href="/customers?page={{$.pagination.Page}}&pageSize={{$.pagination.PageSize}}&sort=gender&direction=desc&firstname={{$.searchFilter.FirstName}}&lastname={{$.searchFilter.LastName}}">
+                                <i class="fas fa-sort-up"></i>
+                              </a>
+                            {{else}}
+                              <a href="/customers?page={{$.pagination.Page}}&pageSize={{$.pagination.PageSize}}&sort=gender&direction=asc&firstname={{$.searchFilter.FirstName}}&lastname={{$.searchFilter.LastName}}">
+                                <i class="fas fa-sort-down"></i>
+                              </a>
+                            {{end}}
+                          {{else}}
+                            <a href="/customers?page={{$.pagination.Page}}&pageSize={{$.pagination.PageSize}}&sort=gender&direction=asc&firstname={{$.searchFilter.FirstName}}&lastname={{$.searchFilter.LastName}}">
+                              <i class="fas fa-sort"></i>
+                            </a>
+                          {{end}}
+                        </th>
+                        <th scope="col" class="border-0 text-uppercase font-medium">
+                          Email
+                          {{if eq $.pagination.Sort "email"}}
+                            {{if eq $.pagination.Direction "asc"}}
+                              <a href="/customers?page={{$.pagination.Page}}&pageSize={{$.pagination.PageSize}}&sort=email&direction=desc&firstname={{$.searchFilter.FirstName}}&lastname={{$.searchFilter.LastName}}">
+                                <i class="fas fa-sort-up"></i>
+                              </a>
+                            {{else}}
+                              <a href="/customers?page={{$.pagination.Page}}&pageSize={{$.pagination.PageSize}}&sort=email&direction=asc&firstname={{$.searchFilter.FirstName}}&lastname={{$.searchFilter.LastName}}">
+                                <i class="fas fa-sort-down"></i>
+                              </a>
+                            {{end}}
+                          {{else}}
+                            <a href="/customers?page={{$.pagination.Page}}&pageSize={{$.pagination.PageSize}}&sort=email&direction=asc&firstname={{$.searchFilter.FirstName}}&lastname={{$.searchFilter.LastName}}">
+                              <i class="fas fa-sort"></i>
+                            </a>
+                          {{end}}
+                        </th>
+                        <th scope="col" class="border-0 text-uppercase font-medium">Operations</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {{range $index, $element := .customers }}
+                      <tr>
+                        <td>
+                          <p class="h6 mt-1">{{.FirstName}}</h5>
+                        </td>
+                        <td>
+                          <p class="h6 mt-1">{{.LastName}}</h5>
+                        </td>
+                        <td>
+                          <p class="h6 mt-1">{{.BirthDate.Format "Jan 02, 2006"}}</h5>
+                        </td>
+                        <td>
+                          <p class="h6 mt-1">{{if eq .Gender "M"}} Male {{else}} Female {{end}}</h5>
+                        </td>
+                        <td>
+                          <p class="h6 mt-1">{{.Email}}</h5>
+                        </td>
+                        <td>
+                          <a href="/customers/{{.Id}}" class="btn btn-outline-info btn-circle btn-sm btn-circle ml-2"><i class="fa fa-eye"></i></a>
+                          <a href="/customers/{{.Id}}/edit" class="btn btn-outline-info btn-circle btn-sm btn-circle ml-2"><i class="fa fa-edit"></i></a>
+                          <a href="/customers/{{.Id}}/delete" class="btn btn-outline-info btn-circle btn-sm btn-circle ml-2"><i class="fa fa-trash"></i></a>
+                        </td>
+                      </tr>
+                      {{end}}
+                    </tbody>
+                  </table>
+              </div>
+          </div>
+      </div>
+    </div>
+    <div class="row mt-3">
+      <div class="col-md-12">
+        <ul class="pagination">
+          {{ range $i, $sequence := .pages }}
+            <li class="page-item {{if eq $sequence $.pagination.Page}}active{{end}}">
+              <a class="page-link" href="/customers?page={{$sequence}}&pageSize={{$.pagination.PageSize}}&sort={{$.pagination.Sort}}&direction={{$.pagination.Direction}}&firstname={{$.searchFilter.FirstName}}&lastname={{$.searchFilter.LastName}}">
+                {{ $sequence }}
+              </a>
+            </li>
+          {{end}}
+        </ul>
+      </div>
+    </div>
+  </div>
+  <script src="/assets/js/bootstrap.js"></script>
+</body>
+</html>
