@@ -19,7 +19,7 @@ import (
 var DatabaseConfiguration struct {
 	User     string `envconfig:"DB_USER" default:"postgres"`
 	Password string `envconfig:"DB_PASS" default:"changeme"`
-	Database string `envconfig:"DB_NAME" default:"clog-local"`
+	Database string `envconfig:"DB_NAME" default:"golang"`
 	Host     string `envconfig:"DB_HOST" default:"localhost"`
 	Port     int    `envconfig:"DB_PORT" default:"5432"`
 }
